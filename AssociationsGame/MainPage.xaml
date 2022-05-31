@@ -1,0 +1,41 @@
+﻿<Page x:Class="AssociationsGame.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AssociationsGame"
+      mc:Ignorable="d" 
+      d:DesignWidth="800" d:DesignHeight="515"
+      Title="MainPage">
+
+    <Page.CommandBindings>
+        <CommandBinding x:Name="CloseCommand"
+                        Command="{x:Static SystemCommands.CloseWindowCommand}"
+                        CanExecute="CloseCommand_CanExecute"
+                        Executed="CloseCommand_Executed"/>
+    </Page.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Viewbox>
+            <TextBlock Text="Associations" FontSize="20" FontFamily="\Resourse\Font\#Comic Helvetic"
+                       Foreground="{StaticResource OnBackground}" FontWeight="SemiBold"
+                       HorizontalAlignment="Center" Margin="60,20,60,0"/>
+        </Viewbox>
+        <StackPanel Grid.Row="1" Height="110" Width="300">
+            <Button x:Name="btnPlay" 
+                Height="50" Content="Играть" Margin="0,0,0,10"
+                FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
+                Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnPlay_Click">
+            </Button>
+            <Button 
+                Height="50" Content="Выход"
+                FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
+                Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
+                Command="{x:Static SystemCommands.CloseWindowCommand}">
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

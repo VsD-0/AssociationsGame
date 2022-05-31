@@ -1,0 +1,54 @@
+﻿<Page x:Class="AssociationsGame.GamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AssociationsGame"
+      xmlns:materialDesign = "http://materialdesigninxaml.net/winfx/xaml/themes" 
+      TextElement.Foreground = "{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight = "Medium" 
+      TextElement.FontSize = "14"
+      FontFamily = "{materialDesign:MaterialDesignFont}"
+      mc:Ignorable="d" 
+      d:DesignWidth="800" d:DesignHeight="515"
+      Title="GamePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="86*"/>
+        </Grid.RowDefinitions>
+        <Viewbox Margin="0,0,0,257" Grid.RowSpan="3">
+            <Grid MaxWidth="5" MinWidth="5" MinHeight="2" MaxHeight="2" Margin="0.3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Viewbox>
+        <ListBox x:Name="Users" Grid.Row="2">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="86"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBox x:Name="textBoxLetter" FontSize="60" Width="60" Height="70" Margin="0,0,0,-7"
+                             Padding="0" FontFamily="\Resourse\Font\#Comic Helvetic"
+                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             CharacterCasing="Upper" MaxLength="1"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Background="{StaticResource SecondaryVariant}"
+                             Foreground="{StaticResource OnSecondary}"
+                             Text="{Binding Path=list}" TextChanged="textBoxLetter_TextChanged"></TextBox>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>
