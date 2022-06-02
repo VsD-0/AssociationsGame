@@ -20,14 +20,28 @@ namespace AssociationsGame
     /// </summary>
     public partial class LevelsPage : Page
     {
+        List<ButtonClass> btnL = new List<ButtonClass>();
         public LevelsPage()
         {
             InitializeComponent();
+
+            for (int i = 0; i < 10; i++)
+            {
+                ButtonClass btn = new ButtonClass();
+                btn.btnContent = (i+1).ToString() + " Уровень";
+                btnL.Add(btn);
+            }
+
+            btnListView.ItemsSource = btnL;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new GamePage());
         }
+    }
+    public class ButtonClass
+    {
+        public string btnContent { get; set; }
     }
 }

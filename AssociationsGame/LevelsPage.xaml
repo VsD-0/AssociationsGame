@@ -14,52 +14,19 @@
       Title="LevelsPage">
 
     <Grid>
-        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden"  VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch"
-                      Style="{StaticResource MaterialDesignScrollViewer}" HorizontalAlignment="Center" Margin="70">
-            <StackPanel VerticalAlignment="Center" Width="200">
-                <Button 
-                        Height="50" Content="1 Уровень" Margin="0,0,0,10"
-                        FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
-                        Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10" Click="Button_Click">
-                </Button>
-                <Button 
-                        Height="50" Content="2 Уровень" Margin="0,0,0,10"
-                        FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
-                        Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10" Click="Button_Click">
-                </Button>
-                <Button 
-                        Height="50" Content="3 Уровень" Margin="0,0,0,10"
-                        FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
-                        Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10" Click="Button_Click">
-                </Button>
-                <Button 
-                        Height="50" Content="4 Уровень" Margin="0,0,0,10"
-                        FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
-                        Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10" Click="Button_Click">
-                </Button>
-                <Button 
-                        Height="50" Content="5 Уровень" Margin="0,0,0,10"
-                        FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
-                        Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10" Click="Button_Click">
-                </Button>
-                <Button 
-                        Height="50" Content="6 Уровень" Margin="0,0,0,10"
-                        FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
-                        Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10" Click="Button_Click">
-                </Button>
-                <Button 
-                        Height="50" Content="7 Уровень" Margin="0,0,0,10"
-                        FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
-                        Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10" Click="Button_Click">
-                </Button>
-            </StackPanel>
-        </ScrollViewer>
+        <Viewbox Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ListView x:Name="btnListView" MaxHeight="650" MaxWidth="300" MinHeight="200" MinWidth="200" Width="500" Margin="50"
+                      Style="{StaticResource MaterialDesignListBox}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Height="50" Width="265" HorizontalAlignment="Stretch" Content="{Binding btnContent}" Margin="0,0,0,10" 
+                                FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
+                                Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
+                                materialDesign:ButtonAssist.CornerRadius="10" Click="Button_Click">
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Viewbox>
     </Grid>
 </Page>

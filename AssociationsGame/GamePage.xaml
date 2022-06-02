@@ -15,12 +15,11 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="61*"/>
-            <RowDefinition Height="25*"/>
-            <RowDefinition Height="86*"/>
+            <RowDefinition Height="323*"/>
+            <RowDefinition Height="192*"/>
         </Grid.RowDefinitions>
-        <Viewbox Margin="0,0,0,257" Grid.RowSpan="3">
-            <Grid MaxWidth="5" MinWidth="5" MinHeight="2" MaxHeight="2" Margin="0.3">
+        <Viewbox>
+            <Grid MaxWidth="1000" MinWidth="1000" MinHeight="500" MaxHeight="500" Margin="0.3" ShowGridLines="true">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -29,26 +28,36 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                <Image Margin="15" Source="/no-image.jpg"/>
+                <Image Margin="15" Grid.Column="1" Source="/no-image.jpg"></Image>
+                <Image Margin="15" Grid.Row="1" Source="/no-image.jpg"></Image>
+                <Image Margin="15" Grid.Row="1" Grid.Column="1" Source="/no-image.jpg"></Image>
             </Grid>
         </Viewbox>
-        <ListBox x:Name="Letters" Grid.Row="2">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="86"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBox x:Name="textBoxLetter" FontSize="60" Width="60" Height="70" Margin="0,0,0,-7"
-                             Padding="0" FontFamily="\Resourse\Font\#Comic Helvetic"
-                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                             CharacterCasing="Upper" MaxLength="1" 
-                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                             Background="{StaticResource SecondaryVariant}"
-                             Foreground="{StaticResource OnSecondary}"
-                             Text="{Binding Path=TbContent, Mode=TwoWay}" KeyDown="textBoxLetter_KeyDown" TextChanged="textBoxLetter_TextChanged"></TextBox>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+
+        <Viewbox Grid.Row="1">
+            <StackPanel MaxWidth="500" MinWidth="100" MinHeight="200" MaxHeight="150" Height="169" Width="auto" Margin="0,50,0,0">
+                <ListBox x:Name="Letters" Height="100">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="85"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBox x:Name="textBoxLetter" FontSize="60" Width="60" Height="70" Margin="0,0,0,-8"
+                                     Padding="0" FontFamily="\Resourse\Font\#Comic Helvetic"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                     CharacterCasing="Upper" MaxLength="1" 
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     Background="{StaticResource SecondaryVariant}"
+                                     Foreground="{StaticResource OnSecondary}"
+                                     Text="{Binding Path=TbContent, Mode=TwoWay}"></TextBox>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button x:Name="checkbtn" Click="checkbtn_Click" Grid.Row="2" Height="50" Width="auto" Margin="25">Check</Button>
+            </StackPanel>
+        </Viewbox>
     </Grid>
 </Page>

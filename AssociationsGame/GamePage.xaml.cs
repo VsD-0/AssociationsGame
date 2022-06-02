@@ -26,38 +26,16 @@ namespace AssociationsGame
         {
             InitializeComponent();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 TextBoxClass tbc = new TextBoxClass();
-                tbc.TbId = i.ToString();
                 letter.Add(tbc);
             }
             
             Letters.ItemsSource = letter;
-            string a = letter[0].TbId;
-            string b = letter[0].TbContent;
         }
-
-
-
-        private void textBoxLetter_TextChanged(object sender, TextChangedEventArgs e)
+        private void checkbtn_Click(object sender, RoutedEventArgs e)
         {
-            //string c = e.Changes.ToString();
-            //string a = letter[0].TbId;
-            //string b = letter[0].TbContent;
-        }
-
-        private void textBoxLetter_KeyDown(object sender, KeyEventArgs e)
-        {
-            string[] eng = {"F", "OemComma", "C", "U", "L", "T", "Oem3", "Oem1", "P", "B", "Q", "R", "K",
-                        "V", "Y", "J", "G", "H", "C", "N", "E", "A", "OemOpenBrackets", "W", "X", "I",
-                        "O", "Oem6", "S", "M", "OemQuotes", "OemPeriod", "Z"};
-            string[] rus = {"А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л",
-                        "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш",
-                        "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я"};
-            string k = e.Key.ToString();
-            string a = letter[0].TbId;
-            string b = letter[0].TbContent;
             string j = "";
             foreach (var item in letter)
             {
@@ -69,6 +47,5 @@ namespace AssociationsGame
     public class TextBoxClass
     {
         public string TbContent { get; set; }
-        public string TbId { get; set; }
     }
 }
