@@ -19,7 +19,7 @@
             <RowDefinition Height="192*"/>
         </Grid.RowDefinitions>
         <Viewbox>
-            <Grid MaxWidth="1000" MinWidth="1000" MinHeight="500" MaxHeight="500" Margin="0.3" ShowGridLines="true">
+            <Grid MaxWidth="1000" MinWidth="1000" MinHeight="500" MaxHeight="500" Margin="0.3">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -34,7 +34,6 @@
                 <Image Margin="15" Grid.Row="1" Grid.Column="1" Source="/no-image.jpg"></Image>
             </Grid>
         </Viewbox>
-
         <Viewbox Grid.Row="1">
             <StackPanel MaxWidth="500" MinWidth="100" MinHeight="200" MaxHeight="150" Height="169" Width="auto" Margin="0,50,0,0">
                 <ListBox x:Name="Letters" Height="100">
@@ -59,5 +58,35 @@
                 <Button x:Name="checkbtn" Click="checkbtn_Click" Grid.Row="2" Height="50" Width="auto" Margin="25">Check</Button>
             </StackPanel>
         </Viewbox>
+        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BottomDrawerCornerRadius="20 20 0 0"
+                BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}">
+            <materialDesign:DrawerHost.Style>
+                <Style TargetType="materialDesign:DrawerHost" BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=BackgroundToggle}" Value="True">
+                            <Setter Property="OverlayBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </materialDesign:DrawerHost.Style>
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <StackPanel Margin="16">
+                    <TextBlock Margin="4" HorizontalAlignment="Center" Text="LEFT FIELD" />
+                    <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Left}"
+                            Margin="4" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="CLOSE THIS" />
+                    <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Margin="4"
+                            HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}" Content="CLOSE ALL" />
+                </StackPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+
+            <Viewbox VerticalAlignment="Top" HorizontalAlignment="Left" Width="80">
+                <Button MaxHeight="500" MaxWidth="500" MinHeight="5" MinWidth="5"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Left}"
+                        Content="{materialDesign:PackIcon Kind=Menu}" Foreground="{StaticResource Primary}" 
+                        Style="{StaticResource MaterialDesignFlatAccentButton}"/>
+            </Viewbox>
+        </materialDesign:DrawerHost>
     </Grid>
 </Page>

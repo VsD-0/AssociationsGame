@@ -47,5 +47,10 @@ namespace AssociationsGame
     public class TextBoxClass
     {
         public string TbContent { get; set; }
+        public string ImgOne { get; set; }
+        public string ImgTwo { get; set; }
+        public string ImgThree { get; set; }
+        public string ImgFour { get; set; }
+        public string Answer { get; set; }
     }
 }
