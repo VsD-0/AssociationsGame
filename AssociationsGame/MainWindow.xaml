@@ -13,8 +13,7 @@
         mc:Ignorable="d"
         Title="Associations" Icon="/MainIcon.png" Height="550" Width="800"
         MinHeight="400" MinWidth="500" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        AllowsTransparency="True" ResizeMode="CanResizeWithGrip" Background="Transparent" 
-        MouseDown="Window_MouseDown">
+        AllowsTransparency="True" ResizeMode="CanResizeWithGrip" Background="Transparent">
     
     <Window.CommandBindings>
         <CommandBinding x:Name="CloseCommand"
@@ -37,42 +36,45 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <!--Иконка и название-->
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <Image Width="30" Height="30" Margin="5, 5, 5, 0" Source="/MainIcon.png"/>
-                    <TextBlock Text="Associations"
-                               Foreground="{StaticResource OnBackground}" FontSize="25"
-                               FontFamily="\Resourse\Font\#Comic Helvetic"
-                               FontWeight="Medium" FontStyle="Normal"
-                               VerticalAlignment="Bottom" Height="30"></TextBlock>
-                </StackPanel>
-                <!--Элементы управления окна-->
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <!--Свернуть окно-->
-                    <Button
-                    Width="30" Height="30" Margin="5, 5, 5, 0"
-                    Cursor="Hand" Style="{StaticResource MaterialDesignIconButton}"
-                    Command="{x:Static SystemCommands.MinimizeWindowCommand}">
-                        <materialDesign:PackIcon Kind="WindowMinimize" Width="30" Height="30"
-                                                 Foreground="{StaticResource Primary}"/>
-                    </Button>
-                    <!--Окно на весь экран-->
-                    <Button
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Width="30" Height="30" Margin="5, 5, 5, 0"
-                    Cursor="Hand" Style="{StaticResource MaterialDesignIconButton}"
-                    Command="{x:Static SystemCommands.MaximizeWindowCommand}">
-                        <materialDesign:PackIcon Kind="WindowMaximize" Width="30" Height="30" Foreground="{StaticResource Primary}"/>
-                    </Button>
-                    <!--Закрыть окно-->
-                    <Button
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Width="30" Height="30" Margin="5, 5, 5, 0"
-                    Cursor="Hand" Style="{StaticResource MaterialDesignIconButton}"
-                    Command="{x:Static SystemCommands.CloseWindowCommand}">
-                        <materialDesign:PackIcon Kind="WindowClose" Width="30" Height="30" Foreground="{StaticResource Primary}"/>
-                    </Button>
-                </StackPanel>
+                
+                <Grid MouseDown="Grid_MouseDown">
+                    <!--Иконка и название-->
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                        <Image Width="30" Height="30" Margin="5, 5, 5, 0" Source="/MainIcon.png"/>
+                        <TextBlock Text="Associations"
+                                   Foreground="{StaticResource OnBackground}" FontSize="25"
+                                   FontFamily="\Resourse\Font\#Comic Helvetic"
+                                   FontWeight="Medium" FontStyle="Normal"
+                                   VerticalAlignment="Bottom" Height="30"></TextBlock>
+                    </StackPanel>
+                    <!--Элементы управления окна-->
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <!--Свернуть окно-->
+                        <Button
+                        Width="30" Height="30" Margin="5, 5, 5, 0"
+                        Cursor="Hand" Style="{StaticResource MaterialDesignIconButton}"
+                        Command="{x:Static SystemCommands.MinimizeWindowCommand}">
+                            <materialDesign:PackIcon Kind="WindowMinimize" Width="30" Height="30"
+                                                     Foreground="{StaticResource Primary}"/>
+                        </Button>
+                        <!--Окно на весь экран-->
+                        <Button
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Width="30" Height="30" Margin="5, 5, 5, 0"
+                        Cursor="Hand" Style="{StaticResource MaterialDesignIconButton}"
+                        Command="{x:Static SystemCommands.MaximizeWindowCommand}">
+                            <materialDesign:PackIcon Kind="WindowMaximize" Width="30" Height="30" Foreground="{StaticResource Primary}"/>
+                        </Button>
+                        <!--Закрыть окно-->
+                        <Button
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Width="30" Height="30" Margin="5, 5, 5, 0"
+                        Cursor="Hand" Style="{StaticResource MaterialDesignIconButton}"
+                        Command="{x:Static SystemCommands.CloseWindowCommand}">
+                            <materialDesign:PackIcon Kind="WindowClose" Width="30" Height="30" Foreground="{StaticResource Primary}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
 
                 <Frame Grid.Row="1" Source="MainPage.xaml" NavigationUIVisibility="Hidden"/>
             </Grid>

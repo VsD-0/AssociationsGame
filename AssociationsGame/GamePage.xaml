@@ -28,10 +28,10 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Margin="15" Source="/no-image.jpg"/>
-                <Image Margin="15" Grid.Column="1" Source="/no-image.jpg"></Image>
-                <Image Margin="15" Grid.Row="1" Source="/no-image.jpg"></Image>
-                <Image Margin="15" Grid.Row="1" Grid.Column="1" Source="/no-image.jpg"></Image>
+                <Image x:Name="Image1" Margin="15" Source="/no-image.jpg" MouseLeftButtonDown="Image1_MouseLeftButtonUp"/>
+                <Image x:Name="Image2" Margin="15" Grid.Column="1" Source="/no-image.jpg" MouseLeftButtonDown="Image2_MouseLeftButtonUp"></Image>
+                <Image x:Name="Image3" Margin="15" Grid.Column="1" Grid.Row="1" Source="/no-image.jpg" MouseLeftButtonDown="Image3_MouseLeftButtonUp"></Image>
+                <Image x:Name="Image4" Margin="15" Grid.Row="1" Source="/no-image.jpg" MouseLeftButtonDown="Image4_MouseLeftButtonUp"></Image>
             </Grid>
         </Viewbox>
         <Viewbox Grid.Row="1">
@@ -58,33 +58,29 @@
                 <Button x:Name="checkbtn" Click="checkbtn_Click" Grid.Row="2" Height="50" Width="auto" Margin="25">Check</Button>
             </StackPanel>
         </Viewbox>
-        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BottomDrawerCornerRadius="20 20 0 0"
-                BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}">
+
+        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <materialDesign:DrawerHost.Style>
-                <Style TargetType="materialDesign:DrawerHost" BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsChecked, ElementName=BackgroundToggle}" Value="True">
-                            <Setter Property="OverlayBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
+                <Style TargetType="materialDesign:DrawerHost" BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}"/>
             </materialDesign:DrawerHost.Style>
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <StackPanel Margin="16">
-                    <TextBlock Margin="4" HorizontalAlignment="Center" Text="LEFT FIELD" />
+                <StackPanel Background="{StaticResource SecondaryVariant}" Width="250">
+                    <TextBlock Margin="4" HorizontalAlignment="Center" Text="Меню" FontFamily="\Resourse\Font\#Comic Helvetic"
+                               FontSize="30" Foreground="{StaticResource OnPrimary}"/>
                     <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Left}"
                             Margin="4" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}"
-                            Content="CLOSE THIS" />
-                    <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" Margin="4"
-                            HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}" Content="CLOSE ALL" />
+                            Content="Возобновить" FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="20"
+                            Foreground="{StaticResource OnPrimary}"/>
+                    <Button Margin="4" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}" 
+                            Content="Главное меню" FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="20"
+                            Foreground="{StaticResource OnPrimary}" x:Name="mainMenu" Click="mainMenu_Click"/>
                 </StackPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
 
             <Viewbox VerticalAlignment="Top" HorizontalAlignment="Left" Width="80">
                 <Button MaxHeight="500" MaxWidth="500" MinHeight="5" MinWidth="5"
                         Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Left}"
-                        Content="{materialDesign:PackIcon Kind=Menu}" Foreground="{StaticResource Primary}" 
+                        Content="{materialDesign:PackIcon Kind=Menu}" Foreground="{StaticResource SecondaryVariant}" 
                         Style="{StaticResource MaterialDesignFlatAccentButton}"/>
             </Viewbox>
         </materialDesign:DrawerHost>

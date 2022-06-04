@@ -58,7 +58,7 @@ namespace AssociationsGame
                 WindowState = WindowState.Maximized;
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }

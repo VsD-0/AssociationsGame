@@ -30,14 +30,21 @@ namespace AssociationsGame
                 ButtonClass btn = new ButtonClass();
                 btn.btnContent = (i+1).ToString() + " Уровень";
                 btnL.Add(btn);
+                btnListView.Items.Add(btn);
             }
+            ButtonClass btnAdd = new ButtonClass();
+            btnAdd.btnContent = "+";
+            btnL.Add(btnAdd);
 
-            btnListView.ItemsSource = btnL;
+            btnListView.Items.Add(btnAdd);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new GamePage());
+            if (e.Source.ToString()[e.Source.ToString().Length-1] == '+')
+                this.NavigationService.Navigate(new GamePage(true));
+            else
+                this.NavigationService.Navigate(new GamePage());
         }
     }
     public class ButtonClass
