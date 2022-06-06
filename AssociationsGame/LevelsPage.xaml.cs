@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace AssociationsGame
 {
@@ -20,35 +22,49 @@ namespace AssociationsGame
     /// </summary>
     public partial class LevelsPage : Page
     {
-        List<ButtonClass> btnL = new List<ButtonClass>();
+        List<Button> btnL = new List<Button>();
         public LevelsPage()
         {
             InitializeComponent();
 
-            for (int i = 0; i < 10; i++)
-            {
-                ButtonClass btn = new ButtonClass();
-                btn.btnContent = (i+1).ToString() + " Уровень";
-                btnL.Add(btn);
-                btnListView.Items.Add(btn);
-            }
-            ButtonClass btnAdd = new ButtonClass();
-            btnAdd.btnContent = "+";
+            string jsonLevels = File.ReadAllText("levels.json");
+            List<LevelClass> listLevel = JsonConvert.DeserializeObject<List<LevelClass>>(jsonLevels);
+            if (listLevel != null)
+                for (int i = 0; i < listLevel.Count; i++)
+                {
+                    Button btn = new Button();
+                    btn.Content = (i+1).ToString() + " Уровень";
+                    
+                    btnL.Add(btn);
+                    stackpanel.Children.Add(btn);
+                }
+            Button btnAdd = new Button();
+            btnAdd.Content = "+";
             btnL.Add(btnAdd);
 
-            btnListView.Items.Add(btnAdd);
+            stackpanel.Children.Add(btnAdd);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (e.Source.ToString()[e.Source.ToString().Length-1] == '+')
+            string jsonLevels = File.ReadAllText("levels.json");
+            List<LevelClass> listLevel = JsonConvert.DeserializeObject<List<LevelClass>>(jsonLevels);
+            if (e.Source.ToString()[e.Source.ToString().Length - 1] == '+')
                 this.NavigationService.Navigate(new GamePage(true));
             else
-                this.NavigationService.Navigate(new GamePage());
+            {
+                foreach (var item in listLevel)
+                {
+                    if (e.Source.ToString().Substring(32) == item.Name)
+                        this.NavigationService.Navigate(new GamePage(item.Name, item.Image, item.Word));
+                }
+            }
         }
     }
-    public class ButtonClass
+    public class LevelClass
     {
-        public string btnContent { get; set; }
+        public string Name { get; set; }
+        public List<string> Image { get; set; }
+        public string Word { get; set; }
     }
 }

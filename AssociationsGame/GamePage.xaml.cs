@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Microsoft.Win32;
+using MaterialDesignThemes;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace AssociationsGame
 {
@@ -23,38 +26,61 @@ namespace AssociationsGame
     public partial class GamePage : Page
     {
         bool modeEdit = false;
-        List<TextBoxClass> letter = new List<TextBoxClass>();
-        public GamePage()
+        List<TextBox> letter = new List<TextBox>();
+        LevelClass lvl = new LevelClass();
+        public GamePage(string name, List<string> image, string word)
         {
             InitializeComponent();
 
-            for (int i = 0; i < 6; i++)
+            lvl.Image = image;
+            lvl.Name = name;
+            lvl.Word = word;
+
+            Image1.Source = new BitmapImage(new Uri(lvl.Image[0], UriKind.RelativeOrAbsolute));
+            Image2.Source = new BitmapImage(new Uri(lvl.Image[1], UriKind.RelativeOrAbsolute));
+            Image3.Source = new BitmapImage(new Uri(lvl.Image[2], UriKind.RelativeOrAbsolute));
+            Image4.Source = new BitmapImage(new Uri(lvl.Image[3], UriKind.RelativeOrAbsolute));
+
+            for (int i = 0; i < lvl.Word.Length; i++)
             {
-                TextBoxClass tbc = new TextBoxClass();
-                letter.Add(tbc);
+                TextBox tb = new TextBox();
+                stackpanel.Children.Add(tb);
+                tb.Width = 60;
+                letter.Add(tb);
             }
-            
-            Letters.ItemsSource = letter;
         }
         public GamePage(bool edit)
         {
             InitializeComponent();
             modeEdit = edit;
-            checkbtn.Content = "Сохранить";
-        }
-        private void checkbtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (modeEdit)
-            {
-                string j = "";
-                foreach (var item in letter)
-                {
-                    j += item.TbContent;
-                }
-                MessageBox.Show(j);
-            }
-        }
 
+            TextBox tb = new TextBox();
+            stackpanel.Children.Add(tb);
+            tb.MaxLength = 11;
+            tb.MinWidth = 60;
+            letter.Add(tb);
+
+            Button btnSave = new Button();
+            mainStackpanel.Children.Add(btnSave);
+        }
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            string jsonRunners = File.ReadAllText("levels.json");
+            List<LevelClass> listLevel = JsonConvert.DeserializeObject<List<LevelClass>>(jsonRunners);
+
+            LevelClass lc = new LevelClass();
+
+            lc.Image = new List<string> { Image1.Source.ToString(), Image2.Source.ToString(), Image3.Source.ToString(), Image4.Source.ToString()};
+            lc.Word = letter[0].Text;
+
+            lc.Name = (listLevel.Count + 1).ToString() + " Уровень";
+
+
+            listLevel.Add(lc);
+            var modifiedJson = JsonConvert.SerializeObject(listLevel, Formatting.Indented);
+            File.WriteAllText("levels.json", modifiedJson);
+            this.NavigationService.Navigate(new MainPage());
+        }
         private void mainMenu_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new MainPage());
@@ -69,6 +95,7 @@ namespace AssociationsGame
                 if (openFileDialog.ShowDialog() == true)
                 {
                     Image1.Source = new BitmapImage(new Uri(openFileDialog.FileName, UriKind.RelativeOrAbsolute));
+                    
                 }
             }
         }
@@ -108,13 +135,51 @@ namespace AssociationsGame
                 }
             }
         }
-    }
-    public class TextBoxClass
-    {
-        public string TbContent { get; set; }
-        public string ImgOne { get; set; }
-        public string ImgTwo { get; set; }
-        public string ImgThree { get; set; }
-        public string Answer { get; set; }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!modeEdit)
+            {
+                string j = "";
+                foreach (var item in letter)
+                {
+                    j += item.Text;
+                }
+                if (j == lvl.Word)
+                {
+                    string jsonRunners = File.ReadAllText("levels.json");
+                    List<LevelClass> listLevel = JsonConvert.DeserializeObject<List<LevelClass>>(jsonRunners);
+                    dialogHost.IsOpen = true;
+                    if (listLevel[listLevel.Count-1].Name == lvl.Name)
+                        wbNext.Visibility = Visibility.Collapsed;
+                }
+                    
+            }
+        }
+
+        class LevelClass
+        {
+            public string Name { get; set; }
+            public List<string> Image { get; set; }
+            public string Word { get; set; }
+        }
+
+        private void wdMenu_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new MainPage());
+        }
+
+        private void wbNext_Click(object sender, RoutedEventArgs e)
+        {
+            string jsonRunners = File.ReadAllText("levels.json");
+            List<LevelClass> listLevel = JsonConvert.DeserializeObject<List<LevelClass>>(jsonRunners);
+            for (int i = 0; i < listLevel.Count; i++)
+            {
+                if (lvl.Name == listLevel[i].Name)
+                {
+                    this.NavigationService.Navigate(new GamePage(listLevel[i+1].Name, listLevel[i+1].Image, listLevel[i+1].Word));
+                }
+            }
+        }
     }
 }
