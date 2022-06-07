@@ -76,28 +76,20 @@
                 </StackPanel>
             </StackPanel>
         </Viewbox>
-        <materialDesign:DialogHost x:Name="dialogHost" Grid.RowSpan="3" DialogTheme="Dark">
+        <materialDesign:DialogHost x:Name="dialogHost" Grid.RowSpan="3" DialogBackground="{StaticResource SecondaryVariant}">
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
                     <TextBlock Text="Победа" HorizontalAlignment="Center" FontSize="40"
                                FontFamily="\Resourse\Font\#Comic Helvetic"/>
                     <StackPanel>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                IsDefault="True" Margin="0 8 8 0" Content="Следующий уровень"
-                                x:Name="wbNext" Click="wbNext_Click">
-                            <Button.CommandParameter>
-                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                    True
-                                </system:Boolean>
-                            </Button.CommandParameter>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Margin="0 8 8 0" Content="Следующий уровень"
+                                x:Name="wbNext" Foreground="{StaticResource OnSecondary}" Click="wbNext_Click" FontFamily="\Resourse\Font\#Comic Helvetic"
+                                HorizontalAlignment="Center">
                         </Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True"
-                                Margin="0 8 8 0" Content="Главное меню" x:Name="wdMenu" Click="wdMenu_Click">
-                            <Button.CommandParameter>
-                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                    False
-                                </system:Boolean>
-                            </Button.CommandParameter>
+                                Margin="0 8 8 0" Content="Главное меню" x:Name="wdMenu" Click="wdMenu_Click"
+                                Foreground="{StaticResource OnSecondary}" FontFamily="\Resourse\Font\#Comic Helvetic"
+                                HorizontalAlignment="Center">
                         </Button>
                     </StackPanel>
                 </StackPanel>

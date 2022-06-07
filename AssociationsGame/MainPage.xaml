@@ -28,13 +28,15 @@
             <Button x:Name="btnPlay" 
                 Height="50" Content="Играть" Margin="0,0,0,10"
                 FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
-                Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnPlay_Click">
+                Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnPlay_Click"
+                Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}">
             </Button>
             <Button 
                 Height="50" Content="Выход"
                 FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25"
                 Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
-                Command="{x:Static SystemCommands.CloseWindowCommand}">
+                Command="{x:Static SystemCommands.CloseWindowCommand}"
+                Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}">
             </Button>
         </StackPanel>
     </Grid>
