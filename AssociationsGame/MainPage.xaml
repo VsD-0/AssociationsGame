@@ -26,7 +26,7 @@
         </Viewbox>
         <StackPanel Grid.Row="1" Height="110" Width="300">
             <Button x:Name="btnPlay" 
-                Height="50" Content="Играть" Margin="0,0,0,10"
+                Height="50" Content="Играть" Margin="0,0,0,11"
                 FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="27"
                 Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnPlay_Click"
                 Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}">
