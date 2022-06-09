@@ -10,7 +10,7 @@
   <ItemGroup>
     <None Remove="MainIcon.png" />
     <None Remove="no-image.jpg" />
-    <None Remove="Resourse\Font\ComicHelvetic.otf" />
+    <None Remove="Resource\Font\ComicHelvetic.otf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +24,7 @@
   <ItemGroup>
     <Resource Include="MainIcon.png" />
     <Resource Include="no-image.jpg" />
-    <Resource Include="Resourse\Font\ComicHelvetic.otf" />
+    <Resource Include="Resource\Font\ComicHelvetic.otf" />
   </ItemGroup>
 
 </Project>

@@ -25,6 +25,7 @@ namespace AssociationsGame
             InitializeComponent();
         }
 
+        // Закрыть окно
         private void CloseCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
@@ -35,6 +36,7 @@ namespace AssociationsGame
             this.Close();
         }
 
+        // Свернутть окно
         private void MinCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
@@ -45,6 +47,7 @@ namespace AssociationsGame
             WindowState = WindowState.Minimized;
         }
 
+        // Расширить окно
         private void MaxCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
@@ -58,9 +61,11 @@ namespace AssociationsGame
                 WindowState = WindowState.Maximized;
         }
 
+        // Перемещение окна
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
     }
 }

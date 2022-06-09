@@ -18,8 +18,28 @@
             <RowDefinition Height="283*"/>
             <RowDefinition Height="157*"/>
         </Grid.RowDefinitions>
-        <TextBlock Foreground="{StaticResource OnBackground}" FontFamily="\Resourse\Font\#Comic Helvetic" 
-        HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Height="71" Width="306" >Associations</TextBlock>
+        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <TextBlock Foreground="{StaticResource OnBackground}" FontFamily="\Resource\Font\#Comic Helvetic" 
+                 FontSize="40" >Associations</TextBlock>
+                <TextBlock Foreground="{StaticResource OnBackground}" FontFamily="\Resource\Font\#Comic Helvetic" 
+                 FontSize="20" HorizontalAlignment="Center" Text="{Binding Path=Level}"></TextBlock>
+            </StackPanel>
+        </Viewbox>
+        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Center">
+            <StackPanel Margin="10">
+                <TextBlock Text="{Binding  Path=Name}" FontSize="20"
+                           TextAlignment="Right" Foreground="{StaticResource OnBackground}"
+                            FontFamily="\Resource\Font\#Comic Helvetic"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Foreground="{StaticResource OnBackground}" FontSize="20"
+                            FontFamily="\Resource\Font\#Comic Helvetic" Text="Money: "></TextBlock>
+                    <TextBlock Text="{Binding  Path=Money}" FontSize="20"
+                           TextAlignment="Right" Foreground="{StaticResource OnBackground}"
+                            FontFamily="\Resource\Font\#Comic Helvetic"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Viewbox>
         <Viewbox Grid.Row="1">
             <Grid MaxWidth="1000" MinWidth="1000" MinHeight="500" MaxHeight="500" Margin="0.3">
                 <Grid.RowDefinitions>
@@ -44,7 +64,7 @@
                         <Setter Property="Width" Value="250"/>
                         <Setter Property="Height" Value="70"/>
                         <Setter Property="Content" Value="Сохранить"/>
-                        <Setter Property="FontFamily" Value="\Resourse\Font\#Comic Helvetic"/>
+                        <Setter Property="FontFamily" Value="\Resource\Font\#Comic Helvetic"/>
                         <Setter Property="Background" Value="{StaticResource Primary}"/>
                         <Setter Property="FontSize" Value="40"/>
                         <Setter Property="Foreground" Value="{StaticResource OnPrimary}"/>
@@ -57,12 +77,11 @@
                     <StackPanel.Resources>
                         <Style TargetType="TextBox">
                             <EventSetter Event="TextBox.TextChanged" Handler="TextBox_TextChanged"/>
-                            <Setter Property="FontSize" Value="60"/>
+                            <Setter Property="FontSize" Value="61"/>
                             <Setter Property="Width" Value="auto"/>
-                            <Setter Property="Height" Value="70"/>
+                            <Setter Property="Height" Value="90"/>
                             <Setter Property="Margin" Value="6,0,6,-8"/>
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="FontFamily" Value="\Resourse\Font\#Comic Helvetic"/>
+                            <Setter Property="FontFamily" Value="\Resource\Font\#Comic Helvetic"/>
                             <Setter Property="VerticalContentAlignment" Value="Center"/>
                             <Setter Property="CharacterCasing" Value="Upper"/>
                             <Setter Property="MaxLength"  Value="1"/>
@@ -76,19 +95,37 @@
                 </StackPanel>
             </StackPanel>
         </Viewbox>
+        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2">
+            <StackPanel Grid.Row="2">
+                <Button x:Name="btnClear" Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        Width="50" Height="50" Foreground="{StaticResource OnSecondary}" 
+                        Background="{StaticResource Primary}" Margin="10" Click="btnClear_Click">
+                    <materialDesign:PackIcon Kind="BackspaceOutline" Height="25" Width="25"/>
+                </Button>
+                <Button x:Name="btnHelp" Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        Width="50" Height="50" Foreground="{StaticResource OnSecondary}" 
+                        Background="{StaticResource Primary}" Margin="10" Click="btnHelp_Click" Cursor="Hand">
+                    <materialDesign:PackIcon Kind="Help" Height="25" Width="25"/>
+                </Button>
+            </StackPanel>
+        </Viewbox>
         <materialDesign:DialogHost x:Name="dialogHost" Grid.RowSpan="3" DialogBackground="{StaticResource SecondaryVariant}">
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
                     <TextBlock Text="Победа" HorizontalAlignment="Center" FontSize="40"
-                               FontFamily="\Resourse\Font\#Comic Helvetic"/>
+                               FontFamily="\Resource\Font\#Comic Helvetic"/>
                     <StackPanel>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Margin="0 8 8 0" Content="Следующий уровень"
-                                x:Name="wbNext" Foreground="{StaticResource OnSecondary}" Click="wbNext_Click" FontFamily="\Resourse\Font\#Comic Helvetic"
+                                x:Name="wbNext" Foreground="{StaticResource OnSecondary}"
+                                Click="wbNext_Click" FontFamily="\Resource\Font\#Comic Helvetic"
                                 HorizontalAlignment="Center">
                         </Button>
+                        <Button Margin="0 8 8 0" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="Уровни" FontFamily="\Resource\Font\#Comic Helvetic"
+                            Foreground="{StaticResource OnSecondary}" x:Name="wdLevels" Click="btnLevels_Click"/>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True"
                                 Margin="0 8 8 0" Content="Главное меню" x:Name="wdMenu" Click="wdMenu_Click"
-                                Foreground="{StaticResource OnSecondary}" FontFamily="\Resourse\Font\#Comic Helvetic"
+                                Foreground="{StaticResource OnSecondary}" FontFamily="\Resource\Font\#Comic Helvetic"
                                 HorizontalAlignment="Center">
                         </Button>
                     </StackPanel>
@@ -100,15 +137,18 @@
                 <Style TargetType="materialDesign:DrawerHost" BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}"/>
             </materialDesign:DrawerHost.Style>
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <StackPanel Background="{StaticResource SecondaryVariant}" Width="250">
-                    <TextBlock Margin="4" HorizontalAlignment="Center" Text="Меню" FontFamily="\Resourse\Font\#Comic Helvetic"
-                               FontSize="30" Foreground="{StaticResource OnPrimary}"/>
+                <StackPanel Background="{StaticResource SecondaryVariant}" Width="300">
+                    <TextBlock Margin="4" HorizontalAlignment="Center" Text="Меню" FontFamily="\Resource\Font\#Comic Helvetic"
+                               FontSize="35" Foreground="{StaticResource OnPrimary}"/>
                     <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" CommandParameter="{x:Static Dock.Left}"
                             Margin="4" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}"
-                            Content="Возобновить" FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="20"
+                            Content="Возобновить" FontFamily="\Resource\Font\#Comic Helvetic" FontSize="25"
                             Foreground="{StaticResource OnPrimary}"/>
+                    <Button Margin="4" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="Уровни" FontFamily="\Resource\Font\#Comic Helvetic" FontSize="25"
+                            Foreground="{StaticResource OnPrimary}" x:Name="btnLevels" Click="btnLevels_Click"/>
                     <Button Margin="4" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}" 
-                            Content="Главное меню" FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="20"
+                            Content="Главное меню" FontFamily="\Resource\Font\#Comic Helvetic" FontSize="25"
                             Foreground="{StaticResource OnPrimary}" x:Name="mainMenu" Click="mainMenu_Click"/>
                 </StackPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>

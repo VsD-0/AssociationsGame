@@ -14,20 +14,24 @@
       Title="LevelsPage">
 
     <Grid>
+        <!--Кнопка назад-->
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="40" Margin="15"
-                FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="25" Padding="0" Command="{x:Static NavigationCommands.BrowseBack}"
-                Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}">Назад</Button>
+                FontFamily="\Resource\Font\#Comic Helvetic" FontSize="25" Padding="0" 
+                Command="{x:Static NavigationCommands.BrowseBack}" Background="{StaticResource Primary}"
+                Foreground="{StaticResource OnPrimary}">Назад</Button>
         <Viewbox Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <ScrollViewer MaxHeight="650" MaxWidth="350" MinHeight="600" MinWidth="200" Width="500" Margin="100" Style="{StaticResource MaterialDesignScrollViewer}">
+            <ScrollViewer MaxHeight="650" MaxWidth="350" MinHeight="600" MinWidth="200" Width="500"
+                          Margin="100" Style="{StaticResource MaterialDesignScrollViewer}">
                 <StackPanel x:Name="stackpanel">
                     <StackPanel.Resources>
-                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+                        <!--Стиль для кнопок в списке-->
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                             <EventSetter Event="Click" Handler="Button_Click"/>
                             <Setter Property="Height" Value="80"/>
                             <Setter Property="Width" Value="320"/>
                             <Setter Property="Margin" Value="0,0,0,10"/>
                             <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                            <Setter Property="FontFamily" Value="\Resourse\Font\#Comic Helvetic"/>
+                            <Setter Property="FontFamily" Value="\Resource\Font\#Comic Helvetic"/>
                             <Setter Property="FontSize" Value="25"/>
                             <Setter Property="Background" Value="{StaticResource Primary}"/>
                             <Setter Property="Foreground" Value="{StaticResource OnPrimary}"/>

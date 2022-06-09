@@ -36,14 +36,14 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <Grid MouseDown="Grid_MouseDown">
                     <!--Иконка и название-->
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <Image Width="30" Height="30" Margin="5, 5, 5, 0" Source="/MainIcon.png"/>
                         <TextBlock Text="Associations"
                                    Foreground="{StaticResource OnBackground}" FontSize="25"
-                                   FontFamily="\Resourse\Font\#Comic Helvetic"
+                                   FontFamily="\Resource\Font\#Comic Helvetic"
                                    FontWeight="Medium" FontStyle="Normal"
                                    VerticalAlignment="Bottom" Height="30"></TextBlock>
                     </StackPanel>
@@ -75,7 +75,6 @@
                         </Button>
                     </StackPanel>
                 </Grid>
-
                 <Frame Grid.Row="1" Source="MainPage.xaml" NavigationUIVisibility="Hidden"/>
             </Grid>
         </Border>

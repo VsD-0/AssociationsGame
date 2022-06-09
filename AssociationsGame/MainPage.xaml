@@ -4,15 +4,18 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AssociationsGame"
+            xmlns:materialDesign = "http://materialdesigninxaml.net/winfx/xaml/themes" 
+      TextElement.Foreground = "{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight = "Medium" 
+      TextElement.FontSize = "14"
+      FontFamily = "{materialDesign:MaterialDesignFont}"
       mc:Ignorable="d" 
       d:DesignWidth="800" d:DesignHeight="515"
       Title="MainPage">
 
     <Page.CommandBindings>
-        <CommandBinding x:Name="CloseCommand"
-                        Command="{x:Static SystemCommands.CloseWindowCommand}"
-                        CanExecute="CloseCommand_CanExecute"
-                        Executed="CloseCommand_Executed"/>
+        <CommandBinding x:Name="CloseCommand" Command="{x:Static SystemCommands.CloseWindowCommand}"
+                        CanExecute="CloseCommand_CanExecute" Executed="CloseCommand_Executed"/>
     </Page.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -20,24 +23,67 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Viewbox>
-            <TextBlock Text="Associations" FontSize="20" FontFamily="\Resourse\Font\#Comic Helvetic"
+            <TextBlock Text="Associations" FontSize="20" FontFamily="\Resource\Font\#Comic Helvetic"
                        Foreground="{StaticResource OnBackground}" FontWeight="SemiBold"
                        HorizontalAlignment="Center" Margin="60,20,60,0"/>
         </Viewbox>
-        <StackPanel Grid.Row="1" Height="110" Width="300">
-            <Button x:Name="btnPlay" 
-                Height="50" Content="Играть" Margin="0,0,0,11"
-                FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="27"
-                Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}" Click="btnPlay_Click"
-                Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}">
+        <StackPanel Grid.Row="1" Height="auto" Width="300" VerticalAlignment="Center">
+            <!--Кнопка новая игра-->
+            <Button x:Name="btnNewGame" Height="50" Content="Новая игра" Margin="0,0,0,11"
+                    FontFamily="\Resource\Font\#Comic Helvetic" FontSize="27" Cursor="Hand" 
+                    Style="{StaticResource MaterialDesignRaisedButton}" Click="btnNewGame_Click"
+                    Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}">
             </Button>
-            <Button 
-                Height="50" Content="Выход"
-                FontFamily="\Resourse\Font\#Comic Helvetic" FontSize="27"
-                Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
-                Command="{x:Static SystemCommands.CloseWindowCommand}"
-                Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}">
+            <!--Кнопка загрузить-->
+            <Button x:Name="btnLoadGame" Height="50" Content="Загрузить" Margin="0,0,0,11"
+                    FontFamily="\Resource\Font\#Comic Helvetic" FontSize="27" Cursor="Hand" 
+                    Style="{StaticResource MaterialDesignRaisedButton}" Click="btnLoadGame_Click"
+                    Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}">
+            </Button>
+            <!--Кнопка выход-->
+            <Button Height="50" Content="Выход" FontFamily="\Resource\Font\#Comic Helvetic" 
+                    FontSize="27" Cursor="Hand" Style="{StaticResource MaterialDesignRaisedButton}"
+                    Command="{x:Static SystemCommands.CloseWindowCommand}" 
+                    Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}">
             </Button>
         </StackPanel>
+        <!--Диалоговое окно-->
+        <materialDesign:DialogHost x:Name="dialogHost" Grid.RowSpan="3"
+                                   DialogBackground="{StaticResource SecondaryVariant}">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="16">
+                    <TextBlock Text="Введите своё имя" HorizontalAlignment="Center" FontSize="40"
+                               FontFamily="\Resource\Font\#Comic Helvetic"/>
+                    <StackPanel>
+                        <!--Ввод имени нового пользователя-->
+                        <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="nameUser"
+                                 Foreground="{StaticResource OnSecondary}" FontSize="35"
+                                 FontFamily="\Resource\Font\#Comic Helvetic"/>
+                        <!--Кнопка продолжить-->
+                        <Button Margin="0 8 8 0" Content="Продолжить" x:Name="wdContinue" 
+                                Foreground="{StaticResource OnSecondary}" Click="wdContinue_Click" 
+                                FontFamily="\Resource\Font\#Comic Helvetic" HorizontalAlignment="Center">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                    <Setter Property="IsEnabled" Value="True"></Setter>
+                                    <Style.Triggers>
+                                        <!--Кнопка не работает до тех пор, пока поле ввода пустое-->
+                                        <DataTrigger Binding="{Binding ElementName=nameUser, Path=Text}" Value="">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <!--Кнопка отмены-->
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True"
+                                Margin="0 8 8 0" Content="Отмена" x:Name="wdMenu" Click="wdMenu_Click"
+                                Foreground="{StaticResource OnSecondary}" FontFamily="\Resource\Font\#Comic Helvetic"
+                                HorizontalAlignment="Center">
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
     </Grid>
 </Page>
