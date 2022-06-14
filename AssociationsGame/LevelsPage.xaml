@@ -10,16 +10,41 @@
       TextElement.FontSize = "14"
       FontFamily = "{materialDesign:MaterialDesignFont}"
       mc:Ignorable="d" 
-      d:DesignWidth="800" d:DesignHeight="515"
+      d:DesignWidth="1100" d:DesignHeight="615"
       Title="LevelsPage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <!--Кнопка назад-->
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="40" Margin="15"
-                FontFamily="\Resource\Font\#Comic Helvetic" FontSize="25" Padding="0" 
-                Command="{x:Static NavigationCommands.BrowseBack}" Background="{StaticResource Primary}"
-                Foreground="{StaticResource OnPrimary}">Назад</Button>
-        <Viewbox Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Button x:Name="btnBack" FontFamily="\Resource\Font\#Comic Helvetic" FontSize="25" Padding="0"
+                Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}"
+                Click="btnBack_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30, 30, 0, 0"
+                Width="120" Grid.Row="0">Назад</Button>
+        <TextBlock FontFamily="\Resource\Font\#Comic Helvetic" FontSize="35" HorizontalAlignment="Center"
+                   Text="Уровни" Margin="0, 20, 0, 0" Foreground="{StaticResource OnBackground}"></TextBlock>
+        <ListView x:Name="listLevels" Grid.Row="1" HorizontalAlignment="Center"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="100,30,100,0">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="220" Height="75" Background="{Binding Path=Brush}" Margin="30, 0, 30, 0">
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}" Click="Button_Click"
+                                HorizontalAlignment="Stretch" Width="220" Height="75"
+                                FontFamily="\Resource\Font\#Comic Helvetic" FontSize="25"
+                                Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}"
+                                Cursor="Hand" Content="{Binding Path=Name}" IsEnabled="{Binding Path=Enabled}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Viewbox x:Name="vbUser" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
             <ScrollViewer MaxHeight="650" MaxWidth="350" MinHeight="600" MinWidth="200" Width="500"
                           Margin="100" Style="{StaticResource MaterialDesignScrollViewer}">
                 <StackPanel x:Name="stackpanel">

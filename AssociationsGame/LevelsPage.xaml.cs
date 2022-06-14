@@ -40,33 +40,41 @@ namespace AssociationsGame
             countLvl = countLevel;
             money = moneyUser;
 
-            // Создание кнопок для списка уровней
+            vbUser.Visibility = Visibility.Collapsed;
+
             string jsonLevels = File.ReadAllText("levels.json");
             List<LevelClass>? listLevel = JsonConvert.DeserializeObject<List<LevelClass>>(jsonLevels);
-            if (listLevel != null)
-                for (int i = 0; i < listLevel.Count; i++)
-                {
-                    Button btn = new Button();
-                    btn.Content = (i+1).ToString() + " Уровень";
-                    if (i > countLevel - 1)
-                    {
-                        btn.IsEnabled = false;
-                    }
-                    btnL.Add(btn);
-                    stackpanel.Children.Add(btn);
-                }
-            // Кнопка для создания нового уровня
-            Button btnAdd = new Button();
-            btnAdd.Content = "+";
-            btnL.Add(btnAdd);
 
-            stackpanel.Children.Add(btnAdd);
+            List<LevelClass> newList = new List<LevelClass>();
+
+            int i = 1;
+            foreach (var p in listLevel)
+            {
+                LevelClass lvl = new LevelClass();
+                lvl.Name = p.Name;
+                lvl.Image = p.Image;
+                lvl.Word = p.Word;
+                if (i <= countLvl)
+                    lvl.Enabled = true;
+                else
+                    lvl.Enabled = false;
+                i++;
+                newList.Add(lvl);
+            }
+            //Кнопка для создания нового уровня
+            LevelClass lvlAdd = new LevelClass();
+            lvlAdd.Name = "+";
+            lvlAdd.Enabled = true;
+            newList.Add(lvlAdd);
+            listLevels.ItemsSource = newList;
         }
 
         // Конструктор для окна списка пользователей
         public LevelsPage(bool loadgame)
         {
             InitializeComponent();
+
+            listLevels.Visibility = Visibility.Collapsed;
 
             loadgame_mode = loadgame;
 
@@ -93,15 +101,13 @@ namespace AssociationsGame
                 List<LevelClass>? listLevel = JsonConvert.DeserializeObject<List<LevelClass>>(jsonLevels);
                 string jsonUsers = File.ReadAllText("users.json");
                 List<User>? listUsers = JsonConvert.DeserializeObject<List<User>>(jsonUsers);
-                if (e.Source.ToString()[e.Source.ToString().Length - 1] == '+')
-                    this.NavigationService.Navigate(new GamePage(true));
-                else
+
+                foreach (var item in listLevel)
                 {
-                    foreach (var item in listLevel)
-                    {
-                        if (e.Source.ToString().Substring(32) == item.Name)
-                            this.NavigationService.Navigate(new GamePage(item.Name, item.Image, item.Word, nameUser, countLvl, money));
-                    }
+                    if (e.Source.ToString().Substring(32) == item.Name)
+                        this.NavigationService.Navigate(new GamePage(item.Name, item.Image, item.Word, nameUser, countLvl, money));
+                    else if (e.Source.ToString()[e.Source.ToString().Length - 1] == '+')
+                        this.NavigationService.Navigate(new GamePage(true, nameUser, countLvl, money));
                 }
             }
             // Нажатие кнопки в списке пользователей
@@ -116,11 +122,20 @@ namespace AssociationsGame
                 }
             }
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (!loadgame_mode)
+                this.NavigationService.Navigate(new LevelsPage(true));
+            else
+                this.NavigationService.Navigate(new MainPage());
+        }
     }
     public class LevelClass
     {
         public string? Name { get; set; }
         public List<string>? Image { get; set; }
         public string? Word { get; set; }
+        public bool Enabled { get; set; }
     }
 }

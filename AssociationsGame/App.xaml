@@ -17,8 +17,8 @@
             <SolidColorBrush x:Key="Background" Color="#022026"></SolidColorBrush>
             <SolidColorBrush x:Key="Primary" Color="#f2b05e"></SolidColorBrush>
             <SolidColorBrush x:Key="PrimaryVariant" Color="#f2bf5e"></SolidColorBrush>
-            <SolidColorBrush x:Key="Secondary" Color="#4ba6a6"></SolidColorBrush>
-            <SolidColorBrush x:Key="SecondaryVariant" Color="#90f280"></SolidColorBrush>
+            <SolidColorBrush x:Key="Secondary" Color="#4B4BA6"></SolidColorBrush>
+            <SolidColorBrush x:Key="SecondaryVariant" Color="#4ba6a6"></SolidColorBrush>
             <SolidColorBrush x:Key="OnBackground" Color="#ffffff"></SolidColorBrush>
             <SolidColorBrush x:Key="OnPrimary" Color="#000000"></SolidColorBrush>
             <SolidColorBrush x:Key="OnSecondary" Color="#000000"></SolidColorBrush>

@@ -65,9 +65,14 @@ namespace AssociationsGame
         }
 
         // Конструктор для режима создания нового уровня
-        public GamePage(bool edit)
+        public GamePage(bool edit, string nameUser, int countLvl, int moneyUser)
         {
             InitializeComponent();
+
+            user.Name = nameUser;
+            user.CountLvl = countLvl;
+            user.Money = moneyUser;
+            user.Level = lvl.Name;
 
             modeEdit = edit;
 
@@ -220,7 +225,7 @@ namespace AssociationsGame
                     List<LevelClass>? listLevel = JsonConvert.DeserializeObject<List<LevelClass>>(jsonRunners);
                     dialogHost.IsOpen = true;
                     if (listLevel[listLevel.Count-1].Name == lvl.Name)
-                        wbNext.Visibility = Visibility.Collapsed;
+                        wdNext.Visibility = Visibility.Collapsed;
                 }
                     
             }
@@ -261,7 +266,7 @@ namespace AssociationsGame
             this.NavigationService.Navigate(new MainPage());
         }
 
-        private void wbNext_Click(object sender, RoutedEventArgs e)
+        private void wdNext_Click(object sender, RoutedEventArgs e)
         {
             string jsonLevels = File.ReadAllText("levels.json");
             List<LevelClass>? listLevel = JsonConvert.DeserializeObject<List<LevelClass>>(jsonLevels);
@@ -275,10 +280,15 @@ namespace AssociationsGame
                     for (int j = 0; j < listUser.Count; j++)
                         if (user.Name == listUser[j].Name)
                         {
-                            listUser[j].Money += 10;
-                            user.CountLvl++;
-                            listUser[j].CountLvl = user.CountLvl;
-                            user.Money += 10;
+                            user.CountLvl = listUser[j].CountLvl;
+                            user.Money = listUser[j].Money;
+                            if (user.CountLvl == int.Parse(lvl.Name.Substring(0,1)))
+                            {
+                                listUser[j].Money += 10;
+                                user.CountLvl++;
+                                listUser[j].CountLvl = user.CountLvl;
+                                user.Money += 10;
+                            }
                             var modifiedJson = JsonConvert.SerializeObject(listUser, Formatting.Indented);
                             File.WriteAllText("users.json", modifiedJson);
                             this.NavigationService.Navigate(new GamePage(listLevel[i + 1].Name, listLevel[i + 1].Image, listLevel[i + 1].Word, user.Name, user.CountLvl, user.Money));
@@ -296,17 +306,13 @@ namespace AssociationsGame
                 if (user.Name == item.Name && item.Money > 19)
                 {
                     item.Money -= 20;
-                    var modifiedJson = JsonConvert.SerializeObject(listUser, Formatting.Indented);
-                    File.WriteAllText("users.json", modifiedJson);
+
                     this.DataContext = item;
 
                     Random random = new Random();
-                    string j = "";
-                    foreach (var i in letter)
-                    {
-                        j += i.Text;
-                    }
-                    int n = (lvl.Word.Length - j.Length) / 2;
+
+                    int n = 1;
+
                     for (int i = 0; i < n; i++)
                     {
                         int l = random.Next(lvl.Word.Length);
@@ -318,14 +324,12 @@ namespace AssociationsGame
                         else
                             n++;
                     }
+                    var modifiedJson = JsonConvert.SerializeObject(listUser, Formatting.Indented);
+                    File.WriteAllText("users.json", modifiedJson);
                 }
             }
         }
 
-        private void btnLevels_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new LevelsPage(user.Name, user.CountLvl, user.Money));
-        }
         
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
@@ -339,6 +343,37 @@ namespace AssociationsGame
                 else
                     continue;
             }
+        }
+
+        private void btnLevels_Click(object sender, RoutedEventArgs e)
+        {
+            if (!modeEdit)
+            {
+                string jsonLevels = File.ReadAllText("levels.json");
+                List<LevelClass>? listLevel = JsonConvert.DeserializeObject<List<LevelClass>>(jsonLevels);
+
+                string jsonUsers = File.ReadAllText("users.json");
+                List<User>? listUser = JsonConvert.DeserializeObject<List<User>>(jsonUsers);
+                string k = "";
+                foreach (var item in letter)
+                {
+                    k += item.Text;
+                }
+                if (user.CountLvl != listLevel.Count + 1 && int.Parse(lvl.Name.ToString().Substring(0, 1)) == user.CountLvl && lvl.Word == k)
+                {
+                    for (int j = 0; j < listUser.Count; j++)
+                        if (user.Name == listUser[j].Name)
+                        {
+                            user.CountLvl++;
+                            listUser[j].CountLvl = user.CountLvl;
+                            listUser[j].Money += 10;
+                            user.Money += 10;
+                            var mod = JsonConvert.SerializeObject(listUser, Formatting.Indented);
+                            File.WriteAllText("users.json", mod);
+                        }
+                }
+            }
+            this.NavigationService.Navigate(new LevelsPage(user.Name, user.CountLvl, user.Money));
         }
     }
 }
