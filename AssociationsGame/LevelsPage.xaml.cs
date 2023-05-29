@@ -78,6 +78,8 @@ namespace AssociationsGame
 
             loadgame_mode = loadgame;
 
+            levelsOrgamers.Text = "Игроки";
+
             // Создание кнопок для списка пользователей
             string jsonUsers = File.ReadAllText("users.json");
             List<User>? listUser = JsonConvert.DeserializeObject<List<User>>(jsonUsers);

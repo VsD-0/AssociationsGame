@@ -23,7 +23,7 @@
                 Background="{StaticResource Primary}" Foreground="{StaticResource OnPrimary}"
                 Click="btnBack_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30, 30, 0, 0"
                 Width="120" Grid.Row="0">Назад</Button>
-        <TextBlock FontFamily="\Resource\Font\#Comic Helvetic" FontSize="35" HorizontalAlignment="Center"
+        <TextBlock x:Name="levelsOrgamers" FontFamily="\Resource\Font\#Comic Helvetic" FontSize="35" HorizontalAlignment="Center"
                    Text="Уровни" Margin="0, 20, 0, 0" Foreground="{StaticResource OnBackground}"></TextBlock>
         <ListView x:Name="listLevels" Grid.Row="1" HorizontalAlignment="Center"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="100,30,100,0">

@@ -69,6 +69,11 @@ namespace AssociationsGame
         {
             InitializeComponent();
 
+            moneytb.Visibility = Visibility.Collapsed;
+            btnHelp.Visibility = Visibility.Hidden;
+            countHelp.Visibility = Visibility.Hidden;
+            btnHelp.IsEnabled = false;
+
             user.Name = nameUser;
             user.CountLvl = countLvl;
             user.Money = moneyUser;
@@ -306,6 +311,7 @@ namespace AssociationsGame
                 if (user.Name == item.Name && item.Money > 19)
                 {
                     item.Money -= 20;
+                    item.Level = user.Level;
 
                     this.DataContext = item;
 
